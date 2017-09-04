@@ -1,4 +1,4 @@
-# cron-bundle
+# Symfony Cron Bundle
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
@@ -7,23 +7,7 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-**Note:** Replace ```Joachim Loevgaard``` ```loevgaard``` ```https://github.com/loevgaard``` ```joachim@loevgaard.dk``` ```loevgaard``` ```cron-bundle``` ```A cron bundle for Symfony``` with their correct values in [README.md](README.md), [CHANGELOG.md](CHANGELOG.md), [CONTRIBUTING.md](CONTRIBUTING.md), [LICENSE.md](LICENSE.md) and [composer.json](composer.json) files, then delete this line. You can run `$ php prefill.php` in the command line to make all replacements at once. Delete the file prefill.php as well.
-
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what
-PSRs you support to avoid any confusion with users and contributors.
-
-## Structure
-
-If any of the following are applicable to your project, then the directory structure should follow industry best practises by being named the following.
-
-```
-bin/        
-config/
-src/
-tests/
-vendor/
-```
-
+A Cron Bundle for Symfony
 
 ## Install
 
@@ -35,10 +19,35 @@ $ composer require loevgaard/cron-bundle
 
 ## Usage
 
-``` php
-$skeleton = new Loevgaard\CronBundle();
-echo $skeleton->echoPhrase('Hello, League!');
+```php
+<?php
+// app/AppKernel.php
+
+// ...
+class AppKernel extends Kernel
+{
+    public function registerBundles()
+    {
+        $bundles = array(
+            // ...
+
+            new Loevgaard\CronBundle\LoevgaardCronBundle(),
+        );
+
+        // ...
+    }
+
+    // ...
+}
 ```
+
+```yaml
+doctrine:
+    dbal:
+        types:
+            money: Loevgaard\CronBundle\Type\CronExpressionType
+```
+
 
 ## Change log
 
