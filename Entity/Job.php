@@ -1,6 +1,6 @@
 <?php
 
-namespace Loevgaard\CronBundle\Model;
+namespace Loevgaard\CronBundle\Entity;
 
 use Cron\CronExpression;
 use Doctrine\ORM\Mapping as ORM;
@@ -8,9 +8,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Loevgaard\CronBundle\Validator\Constraints\ValidCronExpression;
 
 /**
- * @ORM\MappedSuperclass
+ * @ORM\Entity(repositoryClass="JobRepository")
  */
-abstract class Job implements JobInterface
+class Job implements JobInterface
 {
     /**
      * @var mixed
@@ -116,7 +116,20 @@ abstract class Job implements JobInterface
      */
     protected $enabled;
 
-    // @todo create property for setting a 'singleton' job
+    /**
+     * If true, this job will only allow a single process to run at a time
+     *
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean")
+     */
+    protected $singleProcess;
+
+    public function __construct()
+    {
+        $this->enabled = false;
+        $this->singleProcess = false;
+    }
 
     /**
      * @inheritdoc
@@ -293,6 +306,23 @@ abstract class Job implements JobInterface
     public function setEnabled(bool $enabled) : JobInterface
     {
         $this->enabled = $enabled;
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function isSingleProcess(): bool
+    {
+        return $this->singleProcess;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setSingleProcess(bool $singleProcess) : JobInterface
+    {
+        $this->singleProcess = $singleProcess;
         return $this;
     }
 }

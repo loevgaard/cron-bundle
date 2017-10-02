@@ -1,6 +1,6 @@
-services:
-    loevgaard_cron.job_manager:
-        class: Loevgaard\CronBundle\Model\JobManager
-        arguments:
-            - "@doctrine"
-            - "%loevgaard_cron.job_class%"
+#services:
+#    loevgaard_cron.job_manager:
+#        class: Loevgaard\CronBundle\Model\JobManager
+#        arguments:
+#            - "@doctrine"
+#            - "%loevgaard_cron.job_class%"

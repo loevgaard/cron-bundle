@@ -1,6 +1,6 @@
 <?php
 
-namespace Loevgaard\CronBundle\Model;
+namespace Loevgaard\CronBundle\Entity;
 
 use Cron\CronExpression;
 
@@ -120,4 +120,15 @@ interface JobInterface
      * @return JobInterface
      */
     public function setEnabled(bool $enabled) : self;
+
+    /**
+     * @return bool
+     */
+    public function isSingleProcess(): bool;
+
+    /**
+     * @param bool $singleProcess
+     * @return JobInterface
+     */
+    public function setSingleProcess(bool $singleProcess) : self;
 }
