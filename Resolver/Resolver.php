@@ -2,8 +2,7 @@
 
 namespace Loevgaard\CronBundle\Resolver;
 
-
-use Loevgaard\CronBundle\Model\JobInterface;
+use Loevgaard\CronBundle\Entity\JobInterface;
 
 class Resolver
 {

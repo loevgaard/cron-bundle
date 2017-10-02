@@ -125,6 +125,15 @@ class Job implements JobInterface
      */
     protected $singleProcess;
 
+    /**
+     * The pid of the last started process
+     *
+     * @var int
+     *
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    protected $pid;
+
     public function __construct()
     {
         $this->enabled = false;
@@ -323,6 +332,23 @@ class Job implements JobInterface
     public function setSingleProcess(bool $singleProcess) : JobInterface
     {
         $this->singleProcess = $singleProcess;
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getPid(): int
+    {
+        return $this->pid;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setPid(int $pid) : JobInterface
+    {
+        $this->pid = $pid;
         return $this;
     }
 }

@@ -20,7 +20,7 @@ interface JobInterface
      * @param string $name
      * @return JobInterface
      */
-    public function setName(string $name) : self;
+    public function setName(string $name): self;
 
     /**
      * @return string
@@ -31,7 +31,7 @@ interface JobInterface
      * @param string $description
      * @return JobInterface
      */
-    public function setDescription(string $description) : self;
+    public function setDescription(string $description): self;
 
     /**
      * @return string
@@ -42,7 +42,7 @@ interface JobInterface
      * @param string $command
      * @return JobInterface
      */
-    public function setCommand(string $command) : self;
+    public function setCommand(string $command): self;
 
     /**
      * @return string
@@ -53,7 +53,7 @@ interface JobInterface
      * @param string $arguments
      * @return JobInterface
      */
-    public function setArguments(string $arguments) : self;
+    public function setArguments(string $arguments): self;
 
     /**
      * @return int
@@ -64,7 +64,7 @@ interface JobInterface
      * @param int $idleTimeout
      * @return JobInterface
      */
-    public function setIdleTimeout(int $idleTimeout) : self;
+    public function setIdleTimeout(int $idleTimeout): self;
 
     /**
      * @return int
@@ -75,7 +75,7 @@ interface JobInterface
      * @param int $timeout
      * @return JobInterface
      */
-    public function setTimeout(int $timeout) : self;
+    public function setTimeout(int $timeout): self;
 
     /**
      * @return CronExpression
@@ -86,7 +86,7 @@ interface JobInterface
      * @param CronExpression $cronExpression
      * @return JobInterface
      */
-    public function setCronExpression(CronExpression $cronExpression) : self;
+    public function setCronExpression(CronExpression $cronExpression): self;
 
     /**
      * @return string
@@ -97,7 +97,7 @@ interface JobInterface
      * @param string $log
      * @return JobInterface
      */
-    public function setLog(string $log) : self;
+    public function setLog(string $log): self;
 
     /**
      * @return string
@@ -108,7 +108,7 @@ interface JobInterface
      * @param string $errorLog
      * @return JobInterface
      */
-    public function setErrorLog(string $errorLog) : self;
+    public function setErrorLog(string $errorLog): self;
 
     /**
      * @return bool
@@ -119,7 +119,7 @@ interface JobInterface
      * @param bool $enabled
      * @return JobInterface
      */
-    public function setEnabled(bool $enabled) : self;
+    public function setEnabled(bool $enabled): self;
 
     /**
      * @return bool
@@ -130,5 +130,16 @@ interface JobInterface
      * @param bool $singleProcess
      * @return JobInterface
      */
-    public function setSingleProcess(bool $singleProcess) : self;
+    public function setSingleProcess(bool $singleProcess): self;
+
+    /**
+     * @return int
+     */
+    public function getPid(): int;
+
+    /**
+     * @param int $pid
+     * @return JobInterface
+     */
+    public function setPid(int $pid): self;
 }

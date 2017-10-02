@@ -10,7 +10,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('loevgaard_cron');
+        /*$rootNode = $treeBuilder->root('loevgaard_cron');
 
         $rootNode
             ->children()
@@ -19,7 +19,7 @@ class Configuration implements ConfigurationInterface
                     ->cannotBeEmpty()
                 ->end()
             ->end()
-        ;
+        ;*/
 
         return $treeBuilder;
     }

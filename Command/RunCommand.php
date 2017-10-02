@@ -2,8 +2,9 @@
 
 namespace Loevgaard\CronBundle\Command;
 
+use Doctrine\ORM\EntityManager;
 use Loevgaard\CronBundle\Executor\Executor;
-use Loevgaard\CronBundle\Model\JobInterface;
+use Loevgaard\CronBundle\Entity\JobInterface;
 use Loevgaard\CronBundle\Resolver\Resolver;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -20,16 +21,22 @@ class RunCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        /** @var EntityManager $entityManager */
+        $entityManager = $this->getContainer()->get('doctrine')->getManager();
+
         /** @var JobInterface[] $jobs */
-        $jobs = $this->getContainer()->get('loevgaard_cron.job_manager')->getEnabledJobs();
+        $jobs = $entityManager
+            ->getRepository('LoevgaardCronBundle:Job')
+            ->getEnabledJobs()
+        ;
 
         $resolver = new Resolver($jobs);
-
         $jobs = $resolver->resolve();
 
         $executor = new Executor($jobs);
-
         $executor->run();
+
+        $entityManager->flush();
 
         while($executor->isRunning()) {
 

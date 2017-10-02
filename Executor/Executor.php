@@ -2,7 +2,7 @@
 
 namespace Loevgaard\CronBundle\Executor;
 
-use Loevgaard\CronBundle\Model\JobInterface;
+use Loevgaard\CronBundle\Entity\JobInterface;
 use Symfony\Component\Process\Process;
 
 class Executor
@@ -29,7 +29,7 @@ class Executor
     public function run()
     {
         foreach ($this->jobs as $job) {
-            $p = new Process($job->getCommand(), null, null, null, null);
+            $p = new Process($job->getCommand().($job->getArguments() ? ' '.$job->getArguments() : ''));
 
             if($job->getIdleTimeout()) {
                 $p->setIdleTimeout($job->getIdleTimeout());
@@ -39,11 +39,9 @@ class Executor
                 $p->setIdleTimeout($job->getTimeout());
             }
 
-            if($job->getArguments()) {
-                $job->setArguments($job->getArguments());
-            }
-
             $p->start();
+
+            $job->setPid($p->getPid());
 
             $this->processes[] = $p;
         }

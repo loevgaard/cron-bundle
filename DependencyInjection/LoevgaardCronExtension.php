@@ -14,7 +14,7 @@ class LoevgaardCronExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $container->setParameter('loevgaard_cron.job_class', $config['job_class']);
+        //$container->setParameter('loevgaard_cron.job_class', $config['job_class']);
 
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
