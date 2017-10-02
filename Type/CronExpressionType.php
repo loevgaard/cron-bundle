@@ -3,8 +3,8 @@
 namespace Loevgaard\CronBundle\Type;
 
 use Cron\CronExpression;
-use Doctrine\DBAL\Types\Type;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAL\Types\Type;
 
 class CronExpressionType extends Type
 {
@@ -16,8 +16,9 @@ class CronExpressionType extends Type
     }
 
     /**
-     * @param string $value
+     * @param string           $value
      * @param AbstractPlatform $platform
+     *
      * @return CronExpression
      */
     public function convertToPHPValue($value, AbstractPlatform $platform)
@@ -26,8 +27,9 @@ class CronExpressionType extends Type
     }
 
     /**
-     * @param CronExpression $value
+     * @param CronExpression   $value
      * @param AbstractPlatform $platform
+     *
      * @return string
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)

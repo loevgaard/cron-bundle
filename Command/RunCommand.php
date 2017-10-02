@@ -3,8 +3,8 @@
 namespace Loevgaard\CronBundle\Command;
 
 use Doctrine\ORM\EntityManager;
-use Loevgaard\CronBundle\Executor\Executor;
 use Loevgaard\CronBundle\Entity\JobInterface;
+use Loevgaard\CronBundle\Executor\Executor;
 use Loevgaard\CronBundle\Resolver\Resolver;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -30,16 +30,17 @@ class RunCommand extends ContainerAwareCommand
             ->getEnabledJobs()
         ;
 
-        $resolver = new Resolver($jobs);
-        $jobs = $resolver->resolve();
+        if (count($jobs)) {
+            $resolver = $this->getContainer()->get('loevgaard_cron.resolver');
+            $executor = $this->getContainer()->get('loevgaard_cron.executor');
 
-        $executor = new Executor($jobs);
-        $executor->run();
+            $jobs = $resolver->resolve($jobs);
+            $executor->run($jobs);
 
-        $entityManager->flush();
+            $entityManager->flush();
 
-        while($executor->isRunning()) {
-
+            while ($executor->isRunning()) {
+            }
         }
     }
 }

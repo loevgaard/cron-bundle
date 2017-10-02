@@ -9,9 +9,10 @@ class JobRepository extends EntityRepository
     /**
      * @return JobInterface[]
      */
-    public function getEnabledJobs() {
+    public function getEnabledJobs()
+    {
         return $this->findBy([
-           'enabled' => true
+           'enabled' => true,
         ]);
     }
 }

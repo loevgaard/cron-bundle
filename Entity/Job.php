@@ -4,8 +4,8 @@ namespace Loevgaard\CronBundle\Entity;
 
 use Cron\CronExpression;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Loevgaard\CronBundle\Validator\Constraints\ValidCronExpression;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="JobRepository")
@@ -13,12 +13,16 @@ use Loevgaard\CronBundle\Validator\Constraints\ValidCronExpression;
 class Job implements JobInterface
 {
     /**
-     * @var mixed
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Id
      */
     protected $id;
 
     /**
-     * The name of the job. Only used as a reference
+     * The name of the job. Only used as a reference.
      *
      * @var string
      *
@@ -30,7 +34,7 @@ class Job implements JobInterface
     protected $name;
 
     /**
-     * Description of the job. Only used as a reference
+     * Description of the job. Only used as a reference.
      *
      * @var string
      *
@@ -86,7 +90,7 @@ class Job implements JobInterface
     protected $cronExpression;
 
     /**
-     * The output log
+     * The output log.
      *
      * @var string
      *
@@ -98,7 +102,7 @@ class Job implements JobInterface
     protected $log;
 
     /**
-     * The error log
+     * The error log.
      *
      * @var string
      *
@@ -110,23 +114,23 @@ class Job implements JobInterface
     protected $errorLog;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(type="boolean")
      */
     protected $enabled;
 
     /**
-     * If true, this job will only allow a single process to run at a time
+     * If true, this job will only allow a single process to run at a time.
      *
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(type="boolean")
      */
     protected $singleProcess;
 
     /**
-     * The pid of the last started process
+     * The pid of the last started process.
      *
      * @var int
      *
@@ -141,7 +145,7 @@ class Job implements JobInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -149,7 +153,17 @@ class Job implements JobInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
+     */
+    public function setId(int $id): JobInterface
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function getName(): string
     {
@@ -157,16 +171,17 @@ class Job implements JobInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function setName(string $name) : JobInterface
+    public function setName(string $name): JobInterface
     {
         $this->name = $name;
+
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getDescription(): string
     {
@@ -174,16 +189,17 @@ class Job implements JobInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function setDescription(string $description) : JobInterface
+    public function setDescription(string $description): JobInterface
     {
         $this->description = $description;
+
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getCommand(): string
     {
@@ -191,16 +207,17 @@ class Job implements JobInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function setCommand(string $command) : JobInterface
+    public function setCommand(string $command): JobInterface
     {
         $this->command = $command;
+
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getArguments(): string
     {
@@ -208,16 +225,17 @@ class Job implements JobInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function setArguments(string $arguments) : JobInterface
+    public function setArguments(string $arguments): JobInterface
     {
         $this->arguments = $arguments;
+
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getIdleTimeout(): int
     {
@@ -225,16 +243,17 @@ class Job implements JobInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function setIdleTimeout(int $idleTimeout) : JobInterface
+    public function setIdleTimeout(int $idleTimeout): JobInterface
     {
         $this->idleTimeout = $idleTimeout;
+
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getTimeout(): int
     {
@@ -242,16 +261,17 @@ class Job implements JobInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function setTimeout(int $timeout) : JobInterface
+    public function setTimeout(int $timeout): JobInterface
     {
         $this->timeout = $timeout;
+
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getCronExpression(): CronExpression
     {
@@ -259,16 +279,17 @@ class Job implements JobInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function setCronExpression(CronExpression $cronExpression) : JobInterface
+    public function setCronExpression(CronExpression $cronExpression): JobInterface
     {
         $this->cronExpression = $cronExpression;
+
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getLog(): string
     {
@@ -276,16 +297,17 @@ class Job implements JobInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function setLog(string $log) : JobInterface
+    public function setLog(string $log): JobInterface
     {
         $this->log = $log;
+
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getErrorLog(): string
     {
@@ -293,16 +315,17 @@ class Job implements JobInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function setErrorLog(string $errorLog) : JobInterface
+    public function setErrorLog(string $errorLog): JobInterface
     {
         $this->errorLog = $errorLog;
+
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function isEnabled(): bool
     {
@@ -310,16 +333,17 @@ class Job implements JobInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function setEnabled(bool $enabled) : JobInterface
+    public function setEnabled(bool $enabled): JobInterface
     {
         $this->enabled = $enabled;
+
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function isSingleProcess(): bool
     {
@@ -327,16 +351,17 @@ class Job implements JobInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function setSingleProcess(bool $singleProcess) : JobInterface
+    public function setSingleProcess(bool $singleProcess): JobInterface
     {
         $this->singleProcess = $singleProcess;
+
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getPid(): int
     {
@@ -344,11 +369,12 @@ class Job implements JobInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    public function setPid(int $pid) : JobInterface
+    public function setPid(int $pid): JobInterface
     {
         $this->pid = $pid;
+
         return $this;
     }
 }

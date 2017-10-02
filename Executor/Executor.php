@@ -8,34 +8,28 @@ use Symfony\Component\Process\Process;
 class Executor
 {
     /**
-     * @var JobInterface[]
-     */
-    protected $jobs;
-
-    /**
      * @var Process[]
      */
     protected $processes;
 
-    /**
-     * @param JobInterface[] $jobs
-     */
-    public function __construct(array $jobs)
+    public function __construct()
     {
-        $this->jobs = $jobs;
         $this->processes = [];
     }
 
-    public function run()
+    /**
+     * @param JobInterface[] $jobs
+     */
+    public function run(array $jobs)
     {
-        foreach ($this->jobs as $job) {
+        foreach ($jobs as $job) {
             $p = new Process($job->getCommand().($job->getArguments() ? ' '.$job->getArguments() : ''));
 
-            if($job->getIdleTimeout()) {
+            if ($job->getIdleTimeout()) {
                 $p->setIdleTimeout($job->getIdleTimeout());
             }
 
-            if($job->getTimeout()) {
+            if ($job->getTimeout()) {
                 $p->setIdleTimeout($job->getTimeout());
             }
 
@@ -48,14 +42,14 @@ class Executor
     }
 
     /**
-     * Returns true if any of the processes are still running
+     * Returns true if any of the processes are still running.
      *
      * @return bool
      */
-    public function isRunning() : bool
+    public function isRunning(): bool
     {
         foreach ($this->processes as $process) {
-            if($process->isRunning()) {
+            if ($process->isRunning()) {
                 return true;
             }
         }
